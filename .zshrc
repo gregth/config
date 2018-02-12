@@ -7,7 +7,7 @@ editor=vim
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="gentoo"
+ZSH_THEME="agnoster"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -64,29 +64,11 @@ export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=512m"
 export _JAVA_OPTIONS="-Xmx2g"
 
 setopt shwordsplit
-setopt PROMPT_SUBST
-export PROMPT='$FG[089][$(users|sed "s/ /\n/g"|sort|uniq|grep -v `whoami`|wc -l)] %(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) $(git_prompt_info)%#%{$reset_color%} '
+#setopt PROMPT_SUBST
+#export PROMPT='%(!.%{$fg_bold[red]%}.%{$fg_bold[green]%}%n@)%m %{$fg_bold[blue]%}%(!.%1~.%~) $(git_prompt_info)%#%{$reset_color} '
 
-schedprompt() {
-    emulate -L zsh
-    zmodload -i zsh/sched
 
-    # Remove existing event, so that multiple calls to
-    # "schedprompt" work OK.  (You could put one in precmd to push
-    # the timer 30 seconds into the future, for example.)
-    integer i=${"${(@)zsh_scheduled_events#*:*:}"[(I)schedprompt]}
-    (( i )) && sched -$i
-
-    # Test that zle is running before calling the widget (recommended
-    # to avoid error messages).
-    # Otherwise it updates on entry to zle, so there's no loss.
-    zle && zle reset-prompt
-
-    # This ensures we're not too far off the start of the minute
-    sched +1 schedprompt
-}
-
-schedprompt
+#schedprompt
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
@@ -96,3 +78,11 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+alias lh="cd /usr/share/nginx/html/"
+
+alias phplog="tail /var/log/apache2/error.log"
+
+alias mylib="lh && cd mylib"
+alias wifi="sudo service network-manager restart"
+alias fixokular="rm .ICEauthority"

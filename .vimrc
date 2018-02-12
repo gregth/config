@@ -10,7 +10,10 @@ if &term =~ "xterm" || &term =~ "screen"
  endif
 endif
 
-call pathogen#infect()
+let mapleader = ","
+execute pathogen#infect()
+syntax on
+filetype plugin indent on
 
 let g:molokai_original = 1
 :colorscheme molokai
@@ -21,9 +24,9 @@ let g:molokai_original = 1
 " set undolevels=1000
 " set undoreload=10000
 set expandtab
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
 set bs=2
 set ignorecase
 set smartcase
@@ -36,6 +39,11 @@ set showmatch
 set vb t_vb=
 set ruler
 set cursorline
+
+" Fix shift + o slowdown, according to this
+" https://superuser.com/questions/161178/why-does-vim-delay-for-a-second-whenever-i-use-the-o-command-open-a-new-line
+set noesckeys
+
 syntax on
 setlocal spell spelllang=en
 set nospell
@@ -46,7 +54,6 @@ nnoremap / /\v
 vnoremap / /\v
 nnoremap ? ?\v
 vnoremap ? ?\v
-let mapleader = ","
 nnoremap <leader><space> :noh<cr>
 nnoremap <leader>t :tabnew<cr>:e<space>
 nnoremap <leader>pp :set paste<cr>
@@ -158,7 +165,6 @@ map n nzz
 
 autocmd FileType c         set makeprg=gcc\ -Wall\ -O2
 autocmd FileType cpp       set makeprg=g++\ -Wall\ -O2
-autocmd FileType python    set makeprg=python3
 
 " Save, compile and run files
 function! CompileAndRun()
@@ -180,5 +186,35 @@ set foldlevel=99
 set splitbelow
 set splitright
 
+"REQUIRED. This makes vim invoke Latex-Suite when you open a tex file.
+filetype plugin on
+
+" IMPORTANT: win32 users will need to have 'shellslash' set so that latex
+" can be called correctly.
+set shellslash
+
+" IMPORTANT: grep will sometimes skip displaying the file name if you
+" search in a singe file. This will confuse Latex-Suite. Set your grep
+" program to always generate a file-name.
+set grepprg=grep\ -nH\ $*
+
+" OPTIONAL: This enables automatic indentation as you type.
+filetype indent on
+
+" OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to
+" 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+" Latex-speccific settings
+let g:Tex_CompileRule_pdf = 'xelatex -aux-directory=F:/Vim/my_latex_doc/temp --synctex=-1 -src-specials -interaction=nonstopmode $*'
+let g:Tex_DefaultTargetFormat = 'pdf'
+let g:Tex_MultipleCompileFormats='pdf, aux'
+let g:livepreview_previewer = 'okular'
+
+"let g:Tex_ViewRule_pdf = 'xpdf'
+
 " Markdown-specific settings
 autocmd FileType markdown set formatoptions+=t | set tw=79
+
+"/autocmd BufNewFile,BufRead *.js setlocal filetype=typescript
