@@ -1,0 +1,22 @@
+{
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "window.zoomLevel": 1,
+    "editor.tabCompletion": "on",
+    "keyboard.dispatch": "keyCode",
+    "terminal.integrated.shell.osx": "zsh",
+    "editor.fontFamily": "'Monaco','Ubuntu Mono Regular', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.colorTheme": "Dracula",
+    // The path of the shell that the terminal uses on Linux.
+    "terminal.integrated.shell.linux": "zsh",
+    // Controls the font family of the terminal, this defaults to editor.fontFamily's value.
+    //"terminal.integrated.fontFamily": "Monaco for Powerline",
+    "terminal.integrated.fontFamily": "Roboto Mono for Powerline",
+    "editor.fontSize": 13,
+    "window.menuBarVisibility": "toggle",
+    "editor.minimap.enabled": false,
+    "python.linting.pylintPath": "/home/gregth/.local/bin/pylint",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+}
