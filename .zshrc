@@ -86,3 +86,9 @@ alias phplog="tail /var/log/apache2/error.log"
 alias mylib="lh && cd mylib"
 alias wifi="sudo service network-manager restart"
 alias fixokular="rm .ICEauthority"
+alias vs="code"
+
+# Dir: current working directory
+ prompt_dir() {
+   prompt_segment blue black '%2~'
+ }
